@@ -1,7 +1,7 @@
 ﻿<div class="store-page woocommerce">
 	<h2>What of product you interesting today?</h2>
 	
-	<?php if(try_to_count($products) > 0) { ?>
+	<?php if(count($products) > 0) { ?>
 	<div class="store-products">
 		<ul class="products">
 		

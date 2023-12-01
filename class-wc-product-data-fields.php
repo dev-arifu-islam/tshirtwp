@@ -426,7 +426,7 @@ class E_WC_Product_Data_Fields {
 		{
 			$design_id = $data_args['_product_id'];
 			$params = explode(':', $design_id);
-			if (try_to_count($params) > 1)
+			if (count($params) > 1)
 			{
 				$cache 	= $this->cache();
 				$design 	= $cache->get($params[0]);
@@ -438,7 +438,7 @@ class E_WC_Product_Data_Fields {
 				
 				if ( $design != null )
 				{
-					if ( isset($design[$params[1]]) && try_to_count($design[$params[1]]) > 0)
+					if ( isset($design[$params[1]]) && count($design[$params[1]]) > 0)
 					{
 						if( empty($design[$params[1]]['fonts']) )
 						{

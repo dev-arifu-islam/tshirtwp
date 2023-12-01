@@ -53,7 +53,7 @@ class tshirtecommerce_product_colors
 			if ($string !== false)
 			{
 				$products = json_decode($string);
-				if ( isset($products->products) && try_to_count($products->products) > 0)
+				if ( isset($products->products) && count($products->products) > 0)
 				{
 					$data = array();
 					foreach($products->products as $row)
@@ -104,11 +104,11 @@ class tshirtecommerce_product_colors
 							$items[]	= $item;
 						}
 					}
-					if(try_to_count($items) > 1)
+					if(count($items) > 1)
 					{
 						// call GD and create image
 					}
-					elseif(try_to_count($items) == 1)
+					elseif(count($items) == 1)
 					{
 						$img = $items[0]['img'];
 						$result['error']	= 0;
@@ -158,11 +158,11 @@ class tshirtecommerce_product_colors
 	public function get_colors()
 	{
 		$colors 	= array();
-		if( isset($this->product->design->color_hex) && try_to_count($this->product->design->color_hex) > 0 )
+		if( isset($this->product->design->color_hex) && count($this->product->design->color_hex) > 0 )
 		{
 			$hexs 		= $this->product->design->color_hex;
 			$titles 	= $this->product->design->color_title;
-			for( $ii=0; $ii<try_to_count($hexs); $ii++ )
+			for( $ii=0; $ii<count($hexs); $ii++ )
 			{
 				$colors[$hexs[$ii]] = $titles[$ii];
 			}
@@ -176,7 +176,7 @@ class tshirtecommerce_product_colors
 	{
 		$html 	= '';
 		$colors = $this->get_colors();
-		if( try_to_count($colors) )
+		if( count($colors) )
 		{
 			$html 	= '<div class="designer-attributes">';
 			$html 	.= 		'<div class="list-colors">';
@@ -184,7 +184,7 @@ class tshirtecommerce_product_colors
 			foreach($colors as $color => $title)
 			{
 				$array 		= explode(';', $color);
-				$n 			= try_to_count($array);
+				$n 			= count($array);
 				$width 		= (int) (24/$n);
 				
 				$html 		.= '<a href="javascript:void(0);" onclick="tshirtecommerce_colors(this)" data-id="'.$product_id.'" data-color="'.$color.'" data-index="'.$index.'" class="bg-colors" title="'.$title.'">';

@@ -24,7 +24,7 @@
 
 			if(empty($type))
 			{
-				if(isset($idea['types']) && try_to_count($idea['types']))
+				if(isset($idea['types']) && count($idea['types']))
 				{
 					$design_type = '';
 					foreach ($idea['types'] as $type_id)
@@ -75,8 +75,8 @@
 		<?php } ?>
 		
 		<?php
-		$pages = (int) (try_to_count($ideas['rows'])/24);
-		if(try_to_count($ideas['rows']) % 24 > 0)
+		$pages = (int) (count($ideas['rows'])/24);
+		if(count($ideas['rows']) % 24 > 0)
 		{
 			$pages = $pages + 1;
 		}

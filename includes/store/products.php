@@ -1,7 +1,7 @@
 <?php
 $columns 		= 3;
 $number_display 	= 20;
-$results 		= try_to_count($ideas);
+$results 		= count($ideas);
 $page_number 	= (int) ($results/$number_display);
 if($results % $number_display)
 {
@@ -33,7 +33,7 @@ $search_cate = $lang['designer_product_select_category'];
 			</button>
 		</div>
 
-		<?php if(try_to_count($idea_categories)) { ?>
+		<?php if(count($idea_categories)) { ?>
 		<div class="idea-dropdown-content">
 			<div class="idea-categories">
 				<?php
@@ -78,7 +78,7 @@ $search_cate = $lang['designer_product_select_category'];
 <div class="store-ideas woocommerce">
 	<div class="columns-<?php echo $columns; ?>">
 
-		<?php if(try_to_count($ideas)) { ?>
+		<?php if(count($ideas)) { ?>
 		<ul class="products columns-<?php echo $columns; ?>">
 
 			<?php
@@ -183,7 +183,7 @@ $search_cate = $lang['designer_product_select_category'];
 </div>
 <?php
 $designs = array();
-for($i=0; $i<try_to_count($products); $i++)
+for($i=0; $i<count($products); $i++)
 {
 	$product = $products[$i];
 	if(in_array($product['id'], $product_ids))

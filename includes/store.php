@@ -70,7 +70,7 @@ class P9f_store
 			'designer_store_js' => plugins_url( 'assets/js/product.js', dirname(__FILE__) )
 		);
 		$files_js = apply_filters( 'P9f_store_js', $files_js);
-		if(try_to_count($files_js))
+		if(count($files_js))
 		{
 			foreach ($files_js as $file_key => $src)
 			{
@@ -93,7 +93,7 @@ class P9f_store
 			
 			$params  		= explode('+', $cate_id);
 			$current_cate_parent 	= (int) $params[0];
-			if(try_to_count($params) > 1)
+			if(count($params) > 1)
 			{
 				$current_cate_child = (int) $params[1];
 				$curent_cate_active = (int) $params[1];
@@ -132,7 +132,7 @@ class P9f_store
 		$products 	= $P9f->product->getProductsDesign($curent_cate_active);
 		
 		$woo_product_ids = array();
-		for($i=0; $i<try_to_count($products); $i++)
+		for($i=0; $i<count($products); $i++)
 		{
 			$woo_product_ids[$products[$i]['id']] = $products[$i]['parent_id'];
 		}

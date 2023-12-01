@@ -11,13 +11,7 @@
 /*
  * get attribute of product with ajax when change product in design tool
 */
-function try_to_count($item){
-	try {
-		 return count($item);
-	} catch (\Exception $e) {
-		return 0;
-	}
-}
+
 function getAttributes_ajax($attribute)
 {
 
@@ -50,7 +44,7 @@ function getAttributes_ajax($attribute)
 
 
 		$setttings 	= getTshirtSetting();
-		for ($i=0; $i<try_to_count($attrs->name); $i++)
+		for ($i=0; $i<count($attrs->name); $i++)
 		{
 			$html 	.= '<div class="form-group product-fields">';
 			$html 	.= 		'<label for="fields">'.$attrs->name[$i].'</label>';
@@ -75,7 +69,7 @@ function field_ajax($name, $title, $price, $type, $id, $setttings)
 	switch($type)
 	{
 		case 'checkbox':
-			for ($i=0; $i<try_to_count($title); $i++)
+			for ($i=0; $i<count($title); $i++)
 			{
 				$html .= '<label class="checkbox-inline">';
 				$html .= 	'<input type="checkbox" name="'.$id.'['.$i.']" value="'.$i.'"> '.$title[$i];
@@ -89,7 +83,7 @@ function field_ajax($name, $title, $price, $type, $id, $setttings)
 		case 'selectbox':
 			$html .= '<select class="form-control input-sm" name="'.$id.'">';
 
-			for ($i=0; $i<try_to_count($title); $i++)
+			for ($i=0; $i<count($title); $i++)
 			{
 				if ($price[$i] != '0')
 					$html_price = attributePrice($price[$i], $setttings);
@@ -103,7 +97,7 @@ function field_ajax($name, $title, $price, $type, $id, $setttings)
 		break;
 
 		case 'radio':
-			for ($i=0; $i<try_to_count($title); $i++)
+			for ($i=0; $i<count($title); $i++)
 			{
 				$html .= '<label class="radio-inline">';
 				$html .= 	'<input type="radio" name="'.$id.'" value="'.$i.'"> '.$title[$i];
@@ -116,7 +110,7 @@ function field_ajax($name, $title, $price, $type, $id, $setttings)
 
 		case 'textlist':
 			$html 		.= '<style>.product-quantity{display:none;}</style><ul class="p-color-sizes list-number col-md-12">';
-			for ($i=0; $i<try_to_count($title); $i++)
+			for ($i=0; $i<count($title); $i++)
 			{
 				$html .= '<li>';
 
@@ -216,7 +210,7 @@ function getAttributes($attribute)
 
 		$html 				= '';
 		$setttings 				= getTshirtSetting();
-		for ($i=0; $i<try_to_count($attrs->name); $i++)
+		for ($i=0; $i<count($attrs->name); $i++)
 		{
 			$html 	.= '<div class="form-group product-fields">';
 			$html 	.= 	'<label for="fields">'.$attrs->name[$i].'</label>';
@@ -278,7 +272,7 @@ function attribute_field($options, $setttings)
 	switch($type)
 	{
 		case 'checkbox':
-			for ($i=0; $i<try_to_count($title); $i++)
+			for ($i=0; $i<count($title); $i++)
 			{
 				$html .= '<label class="checkbox-inline">';
 				$html .= 	'<input type="checkbox" class="'.$class_required.'" onclick="tshirt_attributes(this, \''.$index.$i.'\')" name="'.$id.'[value]['.$i.']" value="'.htmlentities($title[$i]).'"> '.$title[$i];
@@ -300,7 +294,7 @@ function attribute_field($options, $setttings)
 
 			if($obj == 'image')
 			{
-				for ($i=0; $i<try_to_count($title); $i++)
+				for ($i=0; $i<count($title); $i++)
 				{
 					if( isset($obj_value[$i]) &&  $obj_value[$i] != '')
 					{
@@ -318,7 +312,7 @@ function attribute_field($options, $setttings)
 			else
 			{
 				$html .= '<select class="form-control input-sm '.$class_required.'" data-obj="'.$obj.'" onchange="tshirt_attributes(this, \''.$index.'\')" name="'.$id.'[value]">';
-				for ($i=0; $i<try_to_count($title); $i++)
+				for ($i=0; $i<count($title); $i++)
 				{
 					$html_price = attributePrice($price[$i], $setttings);
 
@@ -330,7 +324,7 @@ function attribute_field($options, $setttings)
 		break;
 
 		case 'radio':
-			for ($i=0; $i<try_to_count($title); $i++)
+			for ($i=0; $i<count($title); $i++)
 			{
 				$html .= '<label class="radio-inline">';
 				$html .= 	'<input type="radio" class="'.$class_required.'" onclick="tshirt_attributes(this, \''.$index.$i.'\')" name="'.$id.'[value]" value="'.htmlentities($title[$i]).'"> '.$title[$i];
@@ -344,7 +338,7 @@ function attribute_field($options, $setttings)
 
 		case 'textlist':
 			$html 		.= '<style>.quantity input.input-text.qty, .quantity{display:none!important;}</style><ul class="p-color-sizes list-number col-md-12">';
-			for ($i=0; $i<try_to_count($title); $i++)
+			for ($i=0; $i<count($title); $i++)
 			{
 				$html .= '<li>';
 
@@ -410,7 +404,7 @@ function getTshirtPrintings($printing_code)
 		if ($content != false && $content != '') {
 			$printings = json_decode($content);
 
-			if (try_to_count($printings)) {
+			if (count($printings)) {
 				foreach ($printings as $printing) {
 					// check printing type of product
 					if ($printing->printing_code == $printing_code) {

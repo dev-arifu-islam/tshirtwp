@@ -1,4 +1,5 @@
 <?php
+
 class e_designer_setting
 {
 	private $step   	= '';
@@ -169,7 +170,7 @@ class e_designer_setting
 		if(isset($data['language']) && $data['language'] != '')
 		{
 			$languages			= $this->get_data('languages.json');
-			if($languages != false && try_to_count($languages) > 0)
+			if($languages != false && count($languages) > 0)
 			{
 				$new_data = array();
 				foreach($languages as $language)
@@ -192,12 +193,12 @@ class e_designer_setting
 			$setting 		= $data['setting'];
 		else
 			$setting 		= array();
-
+	
 		// update layout active
 		if( isset($data['layout']) && $data['layout'] != '' )
 		{
 			$layouts					= $this->get_data('layouts.json');
-			if($layouts != false && try_to_count($layouts) > 0)
+			if($layouts)
 			{
 				$new_data = array();
 				foreach($layouts as $layout)
@@ -210,7 +211,7 @@ class e_designer_setting
 						$setting['theme']	= array(
 							$layout->theme => array()
 						);
-						if( isset($layout->options) && try_to_count($layout->options) )
+						if( isset($layout->options) && $layout->options )
 						{
 							$setting['theme'][$layout->theme] = json_decode(json_encode($layout->options));
 						}
@@ -226,7 +227,7 @@ class e_designer_setting
 		}
 
 		// update setting
-		if(try_to_count($setting))
+		if($setting)
 		{
 			$settings			= $this->get_data('settings.json');
 			foreach($setting as $key => $value)
@@ -263,7 +264,7 @@ class e_designer_setting
 			if( $content != false )
 			{
 				$products 	= json_decode($content);
-				if( try_to_count($products) && isset($products->products) && try_to_count($products->products))
+				if( count($products) && isset($products->products) && count($products->products))
 				{
 					include_once( dirname(dirname(__FILE__)).'/helper/class-wc-api-products.php' );
 					$api 		= new TShirt_API_Products();
@@ -368,7 +369,7 @@ class e_designer_setting
 	{
 		global $P9f;
 
-		if( isset($_POST['setting']) && try_to_count($_POST['setting']) )
+		if( isset($_POST['setting']) && count($_POST['setting']) )
 		{
 			$this->designer_save($_POST);
 		}

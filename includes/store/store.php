@@ -48,7 +48,7 @@ if($paged > 1)
 						<input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $lang['designer_clipart_search']; ?>">
 					</div>
 
-					<?php if(isset($ideas['categories']) && try_to_count($ideas['categories']) > 0){ ?>
+					<?php if(isset($ideas['categories']) && count($ideas['categories']) > 0){ ?>
 					<h3 class="box-title"><?php echo $lang['designer_store_find_categories']; ?></h3>
 					<div class="box-content">
 						<?php
@@ -64,7 +64,7 @@ if($paged > 1)
 								
 								<option value="<?php echo $cate['id']; ?>" <?php if($cate_id == $cate['id']) echo 'selected="selected"'; ?> ><?php echo $cate['title']; ?></option>
 												
-								<?php if( isset($cate['children']) && try_to_count($cate['children']) > 0 ) { ?>
+								<?php if( isset($cate['children']) && count($cate['children']) > 0 ) { ?>
 									
 									<?php foreach($cate['children'] as $children) { ?>
 										<option value="<?php echo $children['id']; ?>" <?php if($cate_id == $children['id']) echo 'selected="selected"'; ?>> &nbsp;&nbsp;&nbsp;- <?php echo $children['title']; ?></option>
@@ -79,7 +79,7 @@ if($paged > 1)
 					<?php } ?>
 				</div>
 			
-				<?php if ( try_to_count($products) ) { ?>
+				<?php if ( count($products) ) { ?>
 				<div class="dg-box">
 					<h3 class="box-title"><?php echo $lang['design_products']; ?></h3>
 					<div class="box-content">

@@ -1,4 +1,4 @@
-<?php if(try_to_count($products)) { ?>
+<?php if(count($products)) { ?>
 <h2 class="wp-heading-inline">The importer is working</h2>
 <h5 class="notice-warning notice" style="padding: 12px;background-color: #fff8e5;color: #ff0000;">Please don't navigate away while importing</h5>
 <style type="text/css">.filename div{white-space: nowrap;} #design-imports{display: none!important;}</style>

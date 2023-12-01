@@ -66,7 +66,7 @@ function design_order_detail($item_id, $item, $order)
 	$data = @WC_Abstract_Order::get_item_meta( $item_id, "custom_designer", true );	
 	
 	echo '<div style="float: right;text-align: left;">';
-	if (isset($data['design_id']) && $data['design_id']!= '' && $data != null && try_to_count($data) > 0)
+	if (isset($data['design_id']) && $data['design_id']!= '' && $data != null && count($data) > 0)
 	{
 		if($download)
 		{
@@ -107,7 +107,7 @@ function design_order_detail($item_id, $item, $order)
 			}				
 		}
 		
-		if (isset($data['teams']['name']) && try_to_count($data['teams']['name']) > 0)
+		if (isset($data['teams']['name']) && count($data['teams']['name']) > 0)
 		{
 			echo '<table>'
 				. 		'<thead>'
@@ -120,7 +120,7 @@ function design_order_detail($item_id, $item, $order)
 				. 		'<tbody>';
 				
 
-		for($i=1; $i<=try_to_count($data['teams']['name']); $i++ )
+		for($i=1; $i<=count($data['teams']['name']); $i++ )
 			{
 				$size = explode('::', $data['teams']['size'][$i]);
 				echo 		'<tr>'
@@ -146,7 +146,7 @@ function design_order_detail($item_id, $item, $order)
 				$options = $data['options'];
 			
 			
-			if (try_to_count($options) > 0)
+			if (count($options) > 0)
 			{
 				foreach($options as $i => $option)
 				{
@@ -160,7 +160,7 @@ function design_order_detail($item_id, $item, $order)
 					if (isset($options[$i]) && isset($options[$i]['value']))
 					{
 						if (is_string($options[$i]['value']) && $options[$i]['value'] == '') continue;
-						if (is_array($options[$i]['value']) && try_to_count($options[$i]['value']) == 0) continue;
+						if (is_array($options[$i]['value']) && count($options[$i]['value']) == 0) continue;
 							
 						echo '<dt>'.$options[$i]['name'].': </dt>';
 						

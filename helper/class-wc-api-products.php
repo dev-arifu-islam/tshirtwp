@@ -2450,7 +2450,7 @@ class TShirt_API_Products {
 			$limit = apply_filters( 'woocommerce_api_bulk_limit', 100, 'products' );
 
 			// Limit bulk operation
-			if ( try_to_count( $data ) > $limit ) {
+			if ( count( $data ) > $limit ) {
 				throw new TShirt_API_Exception( 'woocommerce_api_products_request_entity_too_large', sprintf( __( 'Unable to accept more than %s items for this request', 'woocommerce' ), $limit ), 413 );
 			}
 

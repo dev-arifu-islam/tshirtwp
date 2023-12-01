@@ -62,7 +62,7 @@ class P9f_product
 		{
 			$design_id 			= $_POST['design_id'];
 			$options 		= explode(':', $design_id);
-		    if(try_to_count($options) > 1)
+		    if(count($options) > 1)
 		    {
 		    	$design_id 	= $options[0].':'.$options[1];
 		    }
@@ -135,7 +135,7 @@ class P9f_product
 			}
 			$options 	= explode(':', $product_id);
 			$P9f->is_template = false;
-			if(try_to_count($options) > 2)
+			if(count($options) > 2)
 			{
 				$P9f->is_template 	= true;
 				$P9f->product_id 		= $options[2];
@@ -149,7 +149,7 @@ class P9f_product
 			$P9f->loadProduct();
 			$P9f->product_design = $P9f->product->getProduct($P9f->product_id);
 
-			if(try_to_count($P9f->product_design))
+			if(count($P9f->product_design))
 			{
 				do_action( 'P9f_product_design' );
 				add_filter( 'woocommerce_single_product_image_gallery_classes', array($this, 'gallery_classes'), 5, 2);
@@ -180,7 +180,7 @@ class P9f_product
 				'designer_store_js' => plugins_url( 'assets/js/product.js', dirname(__FILE__) )
 			);
 			$files_js = apply_filters( 'P9f_product_js', $files_js);
-			if(try_to_count($files_js))
+			if(count($files_js))
 			{
 				foreach ($files_js as $file_key => $src)
 				{
@@ -221,7 +221,7 @@ class P9f_product
 				$view = $_GET['view'];
 			}
 			$options 	= explode(':', $_GET['design_id']);
-			if(try_to_count($options) < 3)
+			if(count($options) < 3)
 			{
 				$svg = $svg . '></svg>';
 				echo $svg;
@@ -243,7 +243,7 @@ class P9f_product
 			$P9f->loadProduct();
 			$product 	= $P9f->product->getProduct($options[2]);
 
-			if(try_to_count($product))
+			if(count($product))
 			{
 				$str 		= $product['design']['area'][$view];
 				$str 		= str_replace("'", '"', $str);
@@ -277,7 +277,7 @@ class P9f_product
 							return $a['zIndex'] - $b['zIndex'];
 						}
 						usort($items, 'sortIndex');
-						for($i=0; $i<try_to_count($items); $i++)
+						for($i=0; $i<count($items); $i++)
 						{
 							$item 	= $items[$i];
 							if( isset($item['art_key']) && strpos($item['svg'], '<svg') === false)
@@ -378,7 +378,7 @@ class P9f_product
 		$options 	= explode(':', $P9f->design_shop_id);
 
 		$design 	= $P9f->getShopDesign($options[1], $options[0]);
-		if( isset($design['thumbs']) && try_to_count($design['thumbs']) )
+		if( isset($design['thumbs']) && count($design['thumbs']) )
 		{
 			$thumbs = array();
 			foreach($design['thumbs'] as $view => $val)
@@ -399,7 +399,7 @@ class P9f_product
 		elseif(isset($design['print']) && isset($design['print']['sizes']))
 		{
 			$sizes = json_decode($design['print']['sizes'], true);
-			if(try_to_count($sizes))
+			if(count($sizes))
 			{
 				$thumbs = array();
 				foreach($sizes as $view => $val)

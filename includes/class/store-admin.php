@@ -37,7 +37,7 @@ class P9f_store_admin
 
 		$pages 	= get_pages();
 		$page_id 	= 0;
-		if(try_to_count($pages))
+		if(count($pages))
 		{
 			foreach ($pages as $page)
 			{
@@ -160,9 +160,9 @@ class P9f_store_admin
 
 		$categories = $P9f->getData('categories');
 		echo '<select name="product_design_cate">';
-		if(try_to_count($categories))
+		if(count($categories))
 		{
-			for($i=0; $i<try_to_count($categories); $i++)
+			for($i=0; $i<count($categories); $i++)
 			{
 				if($categories[$i]['parent_id'] > 0) continue;
 				$selected = '';

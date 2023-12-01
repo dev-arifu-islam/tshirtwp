@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<td class="forminp">
 							<select name="<?php echo $data_field_name_url; ?>">
 								
-							<?php if ( try_to_count($pages) > 0){ ?>
+							<?php if ( count($pages) > 0){ ?>
 								<?php foreach($pages as $page) { 
 									if ($opt_val['url'] == $page->ID) $selected = 'selected="selected"';
 									else $selected = '';

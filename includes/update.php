@@ -59,7 +59,7 @@ class update_9file
 		/* check if updated printing */
 		$index = 0;
 		$is_updated = false;
-		for($i=0; $i<try_to_count($printings); $i++)
+		for($i=0; $i<count($printings); $i++)
 		{
 			if($printings[$i]['printing_code'] == 'DTG99'){
 				$is_updated = true;
@@ -180,7 +180,7 @@ class update_9file
 		$changed 	= false;
 		if(isset($products['products'])) //print_type
 		{
-			$n = try_to_count($products['products']);
+			$n = count($products['products']);
 			for($i=0; $i<$n; $i++)
 			{
 				$print_type = $products['products'][$i]['print_type'];

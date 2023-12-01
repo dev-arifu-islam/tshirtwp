@@ -1,5 +1,5 @@
 <?php
-$width_box = 230 * try_to_count($products);
+$width_box = 230 * count($products);
 ?>
 <div class="store-page">
 	<h4><?php echo $lang['designer_more_products']; ?></h4>
@@ -36,10 +36,10 @@ $width_box = 230 * try_to_count($products);
 	</div>
 	
 	<?php if( isset($same_design) ) {
-		if(try_to_count($same_design) > 10)
+		if(count($same_design) > 10)
 			$width_box = 230 * 10;
 		else
-			$width_box = 230 * try_to_count($same_design);
+			$width_box = 230 * count($same_design);
 	?>
 	<h4><?php echo $lang['designer_similar_designs']; ?></h4>
 	<div class="store-products similar-designs">

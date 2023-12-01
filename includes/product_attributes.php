@@ -10,7 +10,7 @@ function designer_product_attribute($values)
 		$values = explode(':', $_GET['user_design']);
 	}
 
-	if (try_to_count($values) == 1) /* blank product */
+	if (count($values) == 1) /* blank product */
 	{
 		$product_id 	= $values[0];
 		$rowid		= 'blank';
@@ -26,7 +26,7 @@ function designer_product_attribute($values)
 
 	// get product
 	$data = $P9f->product_design;
-	if (try_to_count($data))
+	if (count($data))
 	{
 		$dg 				= $P9f->dgClass();
 		$lang 				= $P9f->getLang();
@@ -51,7 +51,7 @@ function designer_product_attribute($values)
 			$extra_html = apply_filters( 'tshirt_product_before_attribute', $extra_html, $values);
 			echo $extra_html;
 
-			if(try_to_count($data->design->color_hex) > 0)
+			if(count($data->design->color_hex) > 0)
 			{
 				echo '<input type="hidden" value="'.$data->id.'" name="product_id">';
 				echo '<input type="hidden" value="'.$data->design->color_hex[0].'" name="color_hex" class="designer_color_hex">';
@@ -61,15 +61,15 @@ function designer_product_attribute($values)
 				echo "<input type='hidden' value='1' name='is_page_detail'>";
 
 				$css = '';
-				if(try_to_count($data->design->color_hex) == 1)
+				if(count($data->design->color_hex) == 1)
 				{
 					$css = 'style="display:none;"';
 				}
-				echo '<div class="product-colors" '.$css.'><label for="fields">'.$lang['designer_product_product_colors'].'</label><div class="list-colors">';
+				echo '<div class="product-colors" '.$css.'><label for="fields">'.$lang['designer_product_product_colors'].'</label><div class="list-colors dd">';
 				foreach($data->design->color_hex as $index => $value)
 				{
 					$colors 		= explode(';', $data->design->color_hex[$index]);
-					$n 			= try_to_count($colors);
+					$n 			= count($colors);
 					$width 		= (int) (34/$n);
 
 					if (isset($values[3]) && $values[3] == $data->design->color_hex[$index])
@@ -96,7 +96,52 @@ function designer_product_attribute($values)
 				}
 				echo '</div></div>';
 			}
-
+			 if (isset($data->design)) {?>
+				<script type="text/javascript">
+					var collor_items = {};
+					collor_items['design'] = {};
+					<?php 
+					$js = '';
+					$elment = count($data->design->color_hex);
+					for($i=0; $i<$elment; $i++)
+					{			
+						$js .= "collor_items['design'][$i] = {};";
+						$js .= "collor_items['design'][$i]['color'] = \"".$data->design->color_hex[$i]."\";";
+						$js .= "collor_items['design'][$i]['title'] = \"".$data->design->color_title[$i]."\";";
+						$postions	= array('front', 'back', 'left', 'right');
+						foreach ($postions as $v)
+						{
+							if(isset($data->design->$v))
+							{
+								$view = $data->design->$v;
+								if (count($view) > 0) 
+								{
+									if (isset($view[$i]) == true)
+									{
+										$item = (string) $view[$i];						
+										$js .= "collor_items['design'][".$i."]['".$v."']=\"".$item."\";";						
+									}
+									else
+									{
+										$js .= "collor_items['design'][$i]['$v'] = '';";
+									}
+								}
+								else
+								{
+									$js .= "collor_items['design'][$i]['$v'] = '';";
+								}	
+							}
+							else
+							{
+								$js .= "collor_items['design'][$i]['$v'] = '';";
+							}
+						}
+					}
+					echo $js;
+					?>
+						
+				</script>
+				<?php } 
 			$html['attributes'] = getAttributes($data->attributes);
 
 			$css = '';
@@ -178,7 +223,7 @@ function product_update_attribute($data_items, $product_id)
 		if ($data_items['design_id'] != 'blank')
 		{
 			$params = explode(':', $data_items['design_id']);
-			if (try_to_count($params) > 1)
+			if (count($params) > 1)
 			{
 				$cache = $dg->cache();
 				$designs = $cache->get($params[0]);

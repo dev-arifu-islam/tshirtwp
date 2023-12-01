@@ -124,7 +124,7 @@ class P9f
 	function getTypesIdeas($types, $search = array())
 	{
 		$data 	= array();
-		if(try_to_count($types))
+		if(count($types))
 		{
 			$products 	= array();
 			foreach($types as $type_id => $product_id)
@@ -143,7 +143,7 @@ class P9f
 			$ids_added 	= array();
 			foreach($types as $type_id => $product_id)
 			{
-				if( isset($ideas_types[$type_id]) && try_to_count($ideas_types[$type_id]) > 0 )
+				if( isset($ideas_types[$type_id]) && count($ideas_types[$type_id]) > 0 )
 				{
 					foreach( $ideas_types[$type_id] as $id )
 					{
@@ -157,7 +157,7 @@ class P9f
 								$data[$id]['types'] = $temp;
 								$type_ids 		= array_intersect($data[$id]['types'], $products);
 							}
-							if(try_to_count($type_ids) > 1)
+							if(count($type_ids) > 1)
 							{
 								$id_active 		= array_rand($type_ids, 1);
 								$product_id 	= $types[$type_ids[$id_active]];
@@ -269,15 +269,15 @@ class P9f
 			/* search category */
 			$cate_ids 	= array();
 			$categories = $this->getData('idea_categories', 'store');
-			$count = try_to_count($categories);
+			$count = count($categories);
 			for($i=0; $i<$count; $i++)
 			{
 				if($categories[$i]['id'] == $search['cate_id'] && isset($categories[$i]['children']))
 				{
 					$children = $categories[$i]['children'];
-					if(try_to_count($children))
+					if(count($children))
 					{
-						for( $j=0; $j<try_to_count($children); $j++ )
+						for( $j=0; $j<count($children); $j++ )
 						{
 							$cate_ids[] = $children[$j]['id'];
 						}
@@ -289,7 +289,7 @@ class P9f
 
 			$cate_ideas	= $this->getData('cate_ideas', 'store');
 			$ids 		= array();
-			for($i=0; $i<try_to_count($cate_ids); $i++)
+			for($i=0; $i<count($cate_ids); $i++)
 			{
 				if(isset($cate_ideas[$cate_ids[$i]]))
 				{
@@ -309,7 +309,7 @@ class P9f
 		}
 
 		/* search keyword */
-		if(try_to_count($data) && $search['keyword'] && $search['keyword'] != '')
+		if(count($data) && $search['keyword'] && $search['keyword'] != '')
 		{
 			$keyword 	= trim(strtolower($search['keyword']));
 			$array 	= array();
@@ -328,7 +328,7 @@ class P9f
 					$array[$id]			= $art;
 					$array[$id]['index']	= strpos($description, $keyword);
 				}
-				elseif( isset($art['tags']) && try_to_count($art['tags'])  && is_array($art['tags']))
+				elseif( isset($art['tags']) && count($art['tags'])  && is_array($art['tags']))
 				{
 					foreach($art['tags'] as $tag)
 					{
@@ -406,7 +406,7 @@ function StorestrSVG($svg, $key)
 	if ($svg == '') return '';
 	
 	$params 	= explode('/', $svg);
-	$n 		= try_to_count($params);
+	$n 		= count($params);
 	
 	$str 		= '';
 	for($i=0; $i<$n; $i++)

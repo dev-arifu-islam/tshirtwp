@@ -14,7 +14,7 @@ if(stripos($link, '?'))
 	<div id="dg-secondary">
 		<div class="dg-body-left">
 			<form action="" method="GET" id="form-store-search">
-				<?php if ( try_to_count($categories) ) { ?>
+				<?php if ( count($categories) ) { ?>
 				<div class="dg-box">
 					<h3 class="box-title"><?php echo $lang['designer_store_find_categories_all']; ?></h3>
 					<div class="box-content">
@@ -42,7 +42,7 @@ if(stripos($link, '?'))
 
 				<?php
 				$design_link = $link;
-				if ( try_to_count($categories_child) ) {
+				if ( count($categories_child) ) {
 				?>
 				<div class="dg-box">
 					<h3 class="box-title"><?php echo $lang['design_products']; ?></h3>

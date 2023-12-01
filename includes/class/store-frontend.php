@@ -41,7 +41,7 @@ class P9f_store_frontend
 			global $P9f;
 
 			$data = $P9f->getIdea($idea_id);
-			if(try_to_count($data))
+			if(count($data))
 			{
 				$P9f->is_template 	= true; 
 				$P9f->design_id 	= $idea_id; 
@@ -59,7 +59,7 @@ class P9f_store_frontend
 	 */
 	function product_title()
 	{
-		if( isset($this->design) && try_to_count($this->design) )
+		if( isset($this->design) && count($this->design) )
 		{
 			$design 	= $this->design;
 			echo '<h4 class="design-title">'.$design['title'].'</h4>';

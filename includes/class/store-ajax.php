@@ -59,7 +59,7 @@ class P9f_store_ajax
 		    $idea_id 		= $_POST['idea_id'];
 		    $idea 			= $this->getIdea($idea_id);
 		    $options 		= explode(':', $idea_id);
-		    if(try_to_count($options) > 1)
+		    if(count($options) > 1)
 		    {
 		    	$idea_id 	= $options[0].':'.$options[1];
 		    }
@@ -97,11 +97,11 @@ class P9f_store_ajax
 				$cliparts 				= array();
 				$cliparts['cliparts'] 		= $data['cliparts'];
 				$cliparts['artStore'] 		= array();
-				if(try_to_count($data['cliparts']))
+				if(count($data['cliparts']))
 				{
 					foreach($data['cliparts'] as $view => $items)
 					{
-						for($i=0; $i<try_to_count($items); $i++)
+						for($i=0; $i<count($items); $i++)
 						{
 							$cliparts['artStore'][] = $items[$i];
 						}
@@ -153,7 +153,7 @@ class P9f_store_ajax
 			$options['print']['colors'] = str_replace('\"', '"', $_POST['print_colors']);
 		}
 
-		if(try_to_count($options))
+		if(count($options))
 		{
 			$options['quantity']	= $_POST['quantity'];
 			$options['product_id']	= $product_id;
@@ -213,9 +213,9 @@ class P9f_store_ajax
 		preg_match_all('/fill=\"(.*?)\"/', $vectors, $fills);
 
 		$colors = array();
-		if(isset($fills[1]) && try_to_count($fills[1]))
+		if(isset($fills[1]) && count($fills[1]))
 		{
-			for($i=0; $i<try_to_count($fills[1]); $i++)
+			for($i=0; $i<count($fills[1]); $i++)
 			{
 				if($fills[1][$i] == 'none' || $fills[1][$i] == '') continue;
 
@@ -227,9 +227,9 @@ class P9f_store_ajax
 		}
 
 		preg_match_all('/stroke=\"(.*?)\"/', $vectors, $strokes);
-		if(isset($strokes[1]) && try_to_count($strokes[1]))
+		if(isset($strokes[1]) && count($strokes[1]))
 		{
-			for($i=0; $i<try_to_count($strokes[1]); $i++)
+			for($i=0; $i<count($strokes[1]); $i++)
 			{
 				if($strokes[1][$i] == 'none' || $strokes[1][$i] == '') continue;
 
@@ -250,12 +250,12 @@ class P9f_store_ajax
 			'cliparts' 	=> array(),
 			'artStore' 	=> array()
 		);
-		if(try_to_count($vectors))
+		if(count($vectors))
 		{
 			foreach ($vectors as $view => $items)
 			{
 				$cliparts['cliparts'][$view] = array();
-				if(try_to_count($items))
+				if(count($items))
 				{
 					foreach ($items as $item)
 					{
@@ -298,7 +298,7 @@ class P9f_store_ajax
 
 		$P9f->loadProduct();
 		$product 		= $P9f->product->getProduct($product_id);
-		if(try_to_count($product))
+		if(count($product))
 		{
 			$result['error'] = 0;
 
@@ -314,7 +314,7 @@ class P9f_store_ajax
 			);
 
 			$idea 	= $this->getIdea($idea_id);
-			if(try_to_count($idea))
+			if(count($idea))
 			{
 				$result['data']['idea'] = array(
 					'thumb' => $idea['thumb'],
@@ -338,7 +338,7 @@ class P9f_store_ajax
 		$data 	= array();
 
 		$options 	= explode(':', $id);
-		if(try_to_count($options) > 2)
+		if(count($options) > 2)
 		{
 			$data 	= $P9f->getShopDesign($options[1], $options[0]);
 			$data['product_design_idea'] = 1;
@@ -457,7 +457,7 @@ class P9f_store_ajax
 						else
 							$params		.= ';'.$id.':'.$art['key'];
 					}
-					if(try_to_count($art_prices) > 0)
+					if(count($art_prices) > 0)
 					{
 						$data['error']	= 1;
 						$data['msg']	= 'Please payment before download file design!';
@@ -503,10 +503,10 @@ class P9f_store_ajax
 		if (is_string($vectors)) {
 			$vectors = json_decode($vectors, true);
 		}
-		if (try_to_count($vectors) < 1) return array();
+		if (count($vectors) < 1) return array();
 		foreach($vectors as $view => $items)
 		{
-			if (try_to_count($items))
+			if (count($items))
 			{
 				foreach($items as $id => $item)
 				{
@@ -541,10 +541,10 @@ class P9f_store_ajax
 										$img 	= 'data:image/png;base64,' . base64_encode($png);
 
 										$temp1 = explode('xlink:href="', $item['svg']);
-										if(try_to_count($temp1) > 1)
+										if(count($temp1) > 1)
 										{
 											$temp2 = explode('">', $temp1[1]);
-											if(try_to_count($temp2) > 1)
+											if(count($temp2) > 1)
 											{
 												$svg 	= $temp1[0] .'xlink:href="'. $img .'">'. $temp2[1];
 											}
@@ -575,15 +575,15 @@ class P9f_store_ajax
 		$array 		= explode(';', $params);
 
 		$arts 		= array();
-		for($i=0; $i<try_to_count($array); $i++)
+		for($i=0; $i<count($array); $i++)
 		{
 			$art 	= explode(':', $array[$i]);
-			if(try_to_count($art) > 1)
+			if(count($art) > 1)
 			{
 				$arts[$art[0]] = $art[1];
 			}
 		}
-		if (try_to_count($arts))
+		if (count($arts))
 		{
 			global $P9f;
 			$dg = $P9f->dgClass();
@@ -635,7 +635,7 @@ class P9f_store_ajax
 			}
 
 			$obj 		= explode(':', $design_id);
-			if(try_to_count($obj) > 1 && $obj[0] != 'cart')
+			if(count($obj) > 1 && $obj[0] != 'cart')
 			{
 				$cache 	= $dg->cache('design');
 				$designs 	= $cache->get($obj[0]);
@@ -679,7 +679,7 @@ class P9f_store_ajax
 			if (isset($design['options']) && isset($design['options']['pages'])) {
 				$pages = $design['options']['pages'];
 				if ($page_number > 1) {
-					if (try_to_count($pages[$page_number]) && isset($pages[$page_number][$position])) {
+					if (count($pages[$page_number]) && isset($pages[$page_number][$position])) {
 						$design['options']['pages'][$page_number] = $this->decryptDesignstore($pages[$page_number], $arts);
 					}
 				}
@@ -696,7 +696,7 @@ class P9f_store_ajax
 				{
 					$vectors = json_decode($design['vector'], true);
 				}
-				if(try_to_count($vectors))
+				if(count($vectors))
 				{
 					$vectors = $this->decryptDesignstore($design['vector'], $arts); // << fixed #320 >>
 				}

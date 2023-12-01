@@ -26,14 +26,14 @@ class P9f_store_products extends P9f
 			$cate_ids 		= array();
 			$cate_ids[] 	= $cate_id;
 			$categories_child = $this->getCategoriesChild($cate_id);
-			for($i = 0; $i < try_to_count($categories_child); $i++)
+			for($i = 0; $i < count($categories_child); $i++)
 			{
 				$cate_ids[] = $categories_child[$i]['id'];
 			}
 
 			$data = $this->getData('product_categories');
 			$ids = array();
-			if(try_to_count($data))
+			if(count($data))
 			{
 				foreach($data as $cate)
 				{
@@ -48,7 +48,7 @@ class P9f_store_products extends P9f
 		$products 	= $this->getData('products');
 
 		$data 	= array();
-		if(isset($ids) && try_to_count($products['products']))
+		if(isset($ids) && count($products['products']))
 		{
 			$array = array();
 			foreach ($products['products'] as $product)
@@ -76,7 +76,7 @@ class P9f_store_products extends P9f
 	public function getProduct($id)
 	{
 		$products 	= $this->getProducts();
-		$n 		= try_to_count($products);
+		$n 		= count($products);
 
 		$data 	= array();
 		for( $i=0; $i<$n; $i++ )
@@ -99,7 +99,7 @@ class P9f_store_products extends P9f
 		$products_design 	= $this->getProducts($cate_id);
 
 		$data 		= array();
-		if(try_to_count($products_design))
+		if(count($products_design))
 		{
 			foreach ($products_design as $product)
 			{
@@ -121,7 +121,7 @@ class P9f_store_products extends P9f
 	function getTypesProducts($products)
 	{
 		$types 	= array();
-		if(try_to_count($products))
+		if(count($products))
 		{
 			$i = 0;
 			foreach ($products as $product)
@@ -130,7 +130,7 @@ class P9f_store_products extends P9f
 				$i++;
 				if( isset($product['store']) && isset($product['store']['types']) )
 				{
-					for($j=0; $j<try_to_count($product['store']['types']); $j++)
+					for($j=0; $j<count($product['store']['types']); $j++)
 					{
 						$type_id = $product['store']['types'][$j];
 						$types[$type_id] = $product['id'];
@@ -158,7 +158,7 @@ class P9f_store_products extends P9f
 		$products = get_posts( $args );
 
 		$data = array();
-		if(try_to_count($products))
+		if(count($products))
 		{
 			global $wc_cpdf;
 			foreach ($products as $product)
@@ -183,7 +183,7 @@ class P9f_store_products extends P9f
 		$data 		= array();
 
 		$categories 	= $this->getData('categories');
-		for($i=0; $i<try_to_count($categories); $i++)
+		for($i=0; $i<count($categories); $i++)
 		{
 			if( $categories[$i]['parent_id'] == 0 )
 			{
@@ -204,7 +204,7 @@ class P9f_store_products extends P9f
 		$categories 	= $this->getData('categories');
 
 		$data 		= array();
-		if(try_to_count($categories))
+		if(count($categories))
 		{
 			foreach ($categories as $cate)
 			{

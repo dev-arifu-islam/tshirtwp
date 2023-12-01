@@ -19,7 +19,7 @@ include_once(dirname(__FILE__) .'/includes/class/' . "init.php");
 
 // call to add-on options
 $filelist = glob(dirname(__FILE__) .'/includes/' . "*.php");
-if (try_to_count($filelist))
+if (count($filelist))
 {
 	foreach($filelist as $file)
 	{
@@ -301,9 +301,9 @@ function P9f_design_button()
 			if ($show_butoon == true)
 			{
 				do_action( 'tshirtecommerce_product_button', $array );
-				if (try_to_count($array) > 1)
+				if (count($array) > 1)
 				{
-					if (try_to_count($array) < 5)
+					if (count($array) < 5)
 					{
 						$link = $link. ':'. $product_id;
 					}
@@ -346,7 +346,7 @@ function P9f_design_button()
 			}
 			elseif( $product->is_type( 'variable' ) )
 			{
-				if (try_to_count($array) > 1)
+				if (count($array) > 1)
 				{
 					$link = $link. ':'. $product_id;
 					$link = add_query_arg( array('design'=>$link), $page );
@@ -385,7 +385,7 @@ function design_button_variable()
 			do_action( 'tshirtecommerce_product_button', $array );
 
 			$page 	= $opt_val['page_designer'];
-			if (try_to_count($array) > 1)
+			if (count($array) > 1)
 			{
 				$link = $link. ':'. $product_id;
 				$link = add_query_arg( array('design'=>$link), $page );
@@ -468,7 +468,7 @@ function wp_ajax_woo_products()
 		if ($ids != '')
 		{
 			$temp = explode(':', $ids);
-			if (try_to_count($temp) == 1)
+			if (count($temp) == 1)
 			{
 				$design[$ids] = $product->ID;
 				$design_ids[] = $ids;
@@ -486,7 +486,7 @@ function wp_ajax_woo_products()
 		if ($string != false)
 		{
 			$products = json_decode($string);
-			if ( isset($products->products) && try_to_count($products->products) > 0)
+			if ( isset($products->products) && count($products->products) > 0)
 			{
 				// find categories
 				$cate_products = $design_ids;
@@ -502,7 +502,7 @@ function wp_ajax_woo_products()
 						{
 							$data = json_decode($content);
 
-							for($i=0; $i < try_to_count($data); $i++)
+							for($i=0; $i < count($data); $i++)
 							{
 								if ($data[$i]->cate_id == $category_id && !in_array($data[$i]->product_id, $product_ids))
 								{
@@ -719,7 +719,7 @@ function tshirtecommerce_func( $atts )
 		{
 			$design = $_GET['design'];
 			$designs = explode(':', $design);
-			if (try_to_count($designs) == 5)
+			if (count($designs) == 5)
 			{
 				if ($designs[0] == 'cart')
 					$url = network_site_url('tshirtecommerce/index.php?product='.$designs[2].'&color='.$designs[3].'&cart_id='.$designs[1].'&parent='.$designs[4]);
@@ -731,7 +731,7 @@ function tshirtecommerce_func( $atts )
 				$url = network_site_url('tshirtecommerce/index.php?product='.$product_design.'&parent='.$product_id);
 			}
 		}
-		elseif(try_to_count($array) > 1)
+		elseif(count($array) > 1)
 		{
 			$url = network_site_url('tshirtecommerce/index.php?product='.$array[2].'&color='.$array[3].'&user='.$array[0].'&id='.$array[1].'&parent='.$product_id);
 			if(isset($_GET['cart_id']) && $_GET['cart_id'] != '')
@@ -762,7 +762,7 @@ function tshirtecommerce_func( $atts )
 
 			$attrs = explode(';', $attribute);
 			$html .= '<script type="text/javascript">var product_attributes = {};';
-			for($i=0; $i<try_to_count($attrs); $i++)
+			for($i=0; $i<count($attrs); $i++)
 			{
 				$field 	= explode('|', $attrs[$i]);
 				$html 	.= 'product_attributes["'.$field[0].'"]="'.$field[1].'"; ';
@@ -902,7 +902,7 @@ function woocommerce_cart_item_name_edit_design( $title, $cart_item, $cart_item_
     if ($data == null && isset(WC()->cart->cart_contents[$cart_item_key][$cart_item_key.'_designer'])) {
 		$data = WC()->cart->cart_contents[$cart_item_key][$cart_item_key.'_designer'];
 	}
-	if ($data != null && try_to_count($data) > 0 && isset($data['design_id']) && $data['design_id'] != '' && $data['design_id'] != 'blank')
+	if ($data != null && count($data) > 0 && isset($data['design_id']) && $data['design_id'] != '' && $data['design_id'] != 'blank')
 	{
 		$product_id = $cart_item['product_id'];
 		$opt_val = get_option( 'online_designer' );
@@ -915,7 +915,7 @@ function woocommerce_cart_item_name_edit_design( $title, $cart_item, $cart_item_
 		if( isset($cart_item['variation_id']) && $cart_item['variation_id'] > 0 )
 		{
 			$link = add_query_arg( array('variation_id'=>$cart_item['variation_id']), $link );
-			if( isset($cart_item['variation']) && try_to_count($cart_item['variation']) )
+			if( isset($cart_item['variation']) && count($cart_item['variation']) )
 			{
 				$attributes = '';
 				foreach($cart_item['variation'] as $name => $value)
@@ -963,7 +963,7 @@ function render_meta_on_cart_item( $title = null, $cart_item = null, $cart_item_
 		if ($data == null && isset(WC()->cart->cart_contents[$cart_item_key][$cart_item_key.'_designer'])) {
 			$data = WC()->cart->cart_contents[$cart_item_key][$cart_item_key.'_designer'];
 		}
-		if ($data != null && try_to_count($data) > 0 && isset($data['design_id']) && $data['design_id'] != '')
+		if ($data != null && count($data) > 0 && isset($data['design_id']) && $data['design_id'] != '')
 		{
 			// get language
 			if (defined('ROOT') == false) // fix define is exists.
@@ -998,7 +998,7 @@ function render_meta_on_cart_item( $title = null, $cart_item = null, $cart_item_
 				}
 			}
 
-			if (isset($data['teams']['name']) && try_to_count($data['teams']['name']) > 0)
+			if (isset($data['teams']['name']) && count($data['teams']['name']) > 0)
 			{
 				echo '<table>'
 					. 		'<thead>'
@@ -1010,7 +1010,7 @@ function render_meta_on_cart_item( $title = null, $cart_item = null, $cart_item_
 					. 		'</thead>'
 					. 		'<tbody>';
 
-				for($i=1; $i<=try_to_count($data['teams']['name']); $i++ )
+				for($i=1; $i<=count($data['teams']['name']); $i++ )
 				{
 					$size = explode('::', $data['teams']['size'][$i]);
 					echo 		'<tr>'
@@ -1040,7 +1040,7 @@ function render_meta_on_cart_item( $title = null, $cart_item = null, $cart_item_
 				else
 					$options = $data['options'];
 
-				if (try_to_count($options) > 0)
+				if (count($options) > 0)
 				{
 					foreach($options as $i => $option)
 					{
@@ -1054,7 +1054,7 @@ function render_meta_on_cart_item( $title = null, $cart_item = null, $cart_item_
 						if (isset($options[$i]) && isset($options[$i]['value']))
 						{
 							if (is_string($options[$i]['value']) && $options[$i]['value'] == '') continue;
-							if (is_array($options[$i]['value']) && try_to_count($options[$i]['value']) == 0) continue;
+							if (is_array($options[$i]['value']) && count($options[$i]['value']) == 0) continue;
 
 							echo '<dt class="variation-title">'.$options[$i]['name'].': </dt>';
 
@@ -1151,7 +1151,7 @@ function oder_item_view_diesign($item_id, $item, $product)
 	$dg = new dg();
 	$lang = $dg->lang('lang.ini', false);
 	// product design
-	if (isset($data['design_id']) && $data['design_id']!= '' && $data != null && try_to_count($data) > 0)
+	if (isset($data['design_id']) && $data['design_id']!= '' && $data != null && count($data) > 0)
 	{
 		$download_design = array();
 		if(isset($_SESSION['download_design']))
@@ -1203,7 +1203,7 @@ function oder_item_view_diesign($item_id, $item, $product)
 				global $wc_cpdf;
 				$product_id = $wc_cpdf->get_value($wo_product_id, '_product_id');
 				$ids = explode(':', $product_id);
-				if (try_to_count($ids) > 2)
+				if (count($ids) > 2)
 				{
 					$product_id = $ids[2];
 				}
@@ -1229,7 +1229,7 @@ function oder_item_view_diesign($item_id, $item, $product)
 			echo $html;
 		}
 
-		if (isset($data['teams']['name']) && try_to_count($data['teams']['name']) > 0)
+		if (isset($data['teams']['name']) && count($data['teams']['name']) > 0)
 		{
 			echo '<table>'
 				. 		'<thead>'
@@ -1241,7 +1241,7 @@ function oder_item_view_diesign($item_id, $item, $product)
 				. 		'</thead>'
 				. 		'<tbody>';
 
-			for($i=1; $i<=try_to_count($data['teams']['name']); $i++ )
+			for($i=1; $i<=count($data['teams']['name']); $i++ )
 			{
 				$size = explode('::', $data['teams']['size'][$i]);
 				echo 		'<tr>'
@@ -1267,7 +1267,7 @@ function oder_item_view_diesign($item_id, $item, $product)
 				$options = $data['options'];
 
 
-			if (try_to_count($options) > 0)
+			if (count($options) > 0)
 			{
 				foreach($options as $i => $option)
 				{
@@ -1281,7 +1281,7 @@ function oder_item_view_diesign($item_id, $item, $product)
 					if (isset($options[$i]) && isset($options[$i]['value']))
 					{
 						if (is_string($options[$i]['value']) && $options[$i]['value'] == '') continue;
-						if (is_array($options[$i]['value']) && try_to_count($options[$i]['value']) == 0) continue;
+						if (is_array($options[$i]['value']) && count($options[$i]['value']) == 0) continue;
 
 						echo '<p><strong class="variation-title">'.$options[$i]['name'].': </strong>';
 
@@ -1419,7 +1419,7 @@ function wp_woo_products_design()
 		if ($ids != '')
 		{
 			$temp = explode(':', $ids);
-			if (try_to_count($temp) == 1)
+			if (count($temp) == 1)
 			{
 				$design[$ids] = $product->ID;
 				$design_ids[] = $ids;

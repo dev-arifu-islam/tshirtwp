@@ -38,7 +38,7 @@ function tshirtecommerce_quick_add_cart()
 	}
 
 	$data = $_POST['views'];
-	if(try_to_count($data))
+	if(count($data))
 	{
 		if (defined('ROOT') == false) // fix define is exists.
 			define('ROOT', dirname(dirname(dirname(dirname(dirname(__FILE__))))). '/tshirtecommerce');
@@ -50,7 +50,7 @@ function tshirtecommerce_quick_add_cart()
 		// get design idea
 		$rowid		= $_POST['rowid'];
 		$params = explode(':', $rowid);
-		if (try_to_count($params) > 1)
+		if (count($params) > 1)
 		{
 			$cache = $dg->cache();
 			$designs = $cache->get($params[0]);
@@ -90,7 +90,7 @@ function tshirtecommerce_quick_add_cart()
 		foreach($data as $view=>$items)
 		{
 			$html = '<svg  width="'.$box_width.'" height="'.$box_height.'" viewBox="0 0 '.$box_width.' '.$box_height.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none">';
-			if(try_to_count($items)> 0)
+			if(count($items)> 0)
 			{
 				foreach($items as $item)
 				{
@@ -193,7 +193,7 @@ function tshirtecommerce_product_image_load()
 				if ($string != false)
 				{
 					$products = json_decode($string);
-					if ( isset($products->products) && try_to_count($products->products) > 0)
+					if ( isset($products->products) && count($products->products) > 0)
 					{
 						foreach($products->products as $product)
 						{
@@ -241,14 +241,14 @@ function tshirtecommerce_design_load()
 		$params 	= explode(':', $design_id);
 
 		$result 	= array();
-		if(try_to_count($params) == 1)
+		if(count($params) == 1)
 		{
 			$design 	= $P9f->getIdea($design_id);
 			if(isset($design['vectors']))
 			{
 				$result['design'] = base64_encode( json_encode($design) );
 			}
-			elseif(try_to_count($design))
+			elseif(count($design))
 			{
 				if( isset($design['type']) && $design['type'] == 'shop' )
 				{

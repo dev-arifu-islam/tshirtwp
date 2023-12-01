@@ -137,13 +137,13 @@ class P9f_Import
     {
         $result = array();
 
-        if (try_to_count($array) < 1) return $result;
+        if (count($array) < 1) return $result;
 
         foreach ($array as $row) {
             if (!in_array($row[$parent], $result)) {
 
                 $result[] = $row[$parent];
-                if (!empty($child) && isset($row[$child]) && try_to_count($row[$child])) {
+                if (!empty($child) && isset($row[$child]) && count($row[$child])) {
 
                     foreach ($row[$child] as $r) {
                         if (!in_array($r[$parent], $result)) {
@@ -163,8 +163,8 @@ class P9f_Import
         foreach ($data as $key => &$row) {
 
             if ($row[$parent] == $new[$parent]) {
-                if (!empty($child) && isset($new[$child]) && try_to_count($new[$child])) {
-                    if (isset($row[$child]) && try_to_count($row[$child])) {
+                if (!empty($child) && isset($new[$child]) && count($new[$child])) {
+                    if (isset($row[$child]) && count($row[$child])) {
 
                         $ids = $this->addProperty($row[$child]);
 
@@ -203,7 +203,7 @@ class P9f_Import
                 $deleteds = array();
             }
 
-            if (try_to_count($deleteds)) {
+            if (count($deleteds)) {
                 if (isset($deleteds['art'])) {
                     $deleteds['art'] = array();
                 }
@@ -237,10 +237,10 @@ class P9f_Import
 
         // fixed exception when download false
         // stop compile when $news is null
-        if (try_to_count($news) < 1) return true;
+        if (count($news) < 1) return true;
 
         $data = $olds;
-        if (try_to_count($data)) {
+        if (count($data)) {
             switch ($file_name) {
                 case 'art_categories':
                 case 'idea_categories':
@@ -381,7 +381,7 @@ class P9f_Import
 						{
 							$folder 	= $folders[0];
 							$files 	= glob($folder . '/*.txt');
-							for($i=0; $i<try_to_count($files); $i++)
+							for($i=0; $i<count($files); $i++)
 							{
 								$file_name 	= str_replace($folder.'/', '', $files[$i]);
 								rename($files[$i], $path.$file_name);
@@ -467,7 +467,7 @@ class P9f_Import
 			{
 				$content 	= file_get_contents($file_products);
 				$products 	= json_decode($content, true);
-				if(try_to_count($products))
+				if(count($products))
 				{
 					foreach($products as $product)
 					{
@@ -503,10 +503,10 @@ class P9f_Import
 		if( $content != false )
 		{
 			$row 	= json_decode($content, true);
-			if( try_to_count($row) && isset($row['products']) )
+			if( count($row) && isset($row['products']) )
 			{
 				$added 	= false;
-				if(try_to_count($row['products']))
+				if(count($row['products']))
 				{
 					foreach ($row['products'] as $i => $product)
 					{
@@ -543,7 +543,7 @@ class P9f_Import
 
 	function woo_add_product($data)
 	{
-		if(try_to_count($data) == 0) return;
+		if(count($data) == 0) return;
 
 		$product_id = wc_get_product_id_by_sku($data['sku']);
 		if($product_id > 0) return;
@@ -601,7 +601,7 @@ class P9f_Import
 		$img 		= str_replace('//', '/', $img);
 		$options 	= explode('/', $img);
 		$path 	= dirname($TSHIRTECOMMERCE_ROOT);
-		for($i=0; $i<(try_to_count($options)-1); $i++)
+		for($i=0; $i<(count($options)-1); $i++)
 		{
 			$path .= '/'.$options[$i];
 			if (!file_exists($path))
